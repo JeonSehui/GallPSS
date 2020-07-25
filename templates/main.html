@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block page_title %}
+    Home
+{% endblock page_title %}
+
+{% block content %}
+
+    <h5>
+        {% if user.is_authenticated %}
+        <li><a href="{% url "users:logout" %}">Log out</a></li>
+        {% else %}
+        <li><a href="{% url "users:loginProc" %}">Log in</a></li>
+        {% endif %}
+    </h5>
+
+
+{% endblock content %}
