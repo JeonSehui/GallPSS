@@ -1,0 +1,25 @@
+.loginPage { flex: 1; display: flex; justify-content: center; align-items: center; font-family: Roboto, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-align: center; color: #2c3e50; margin: 0; flex-direction: column; min-height: 100vh; background: #102a43; }
+
+.loginPage .el-button--primary { background: #007c89; border-color: #007c89; }
+
+.loginPage .el-button--primary:hover, .loginPage .el-button--primary.active, .loginPage .el-button--primary:focus { background: #009cad; border-color: #009cad; }
+
+.loginPage .el-input__inner:hover { border-color: #007c89; }
+
+.loginPage .el-input__prefix { background: #eeedea; left: 0; height: calc(100% - 2px); left: 1px; top: 1px; border-radius: 3px; }
+
+.loginPage .el-input__prefix .el-input__icon { width: 30px; }
+
+.loginPage .el-input input { padding-left: 35px; }
+
+.loginPage .el-card { height: 400px; padding-top: 0; padding-bottom: 10px; border-radius: 10px; background-color: white; }
+
+h2 { font-family: "Open Sans"; letter-spacing: 1px; font-family: Roboto, SansSerif; padding-top: 20px; }
+
+a { color: #007c89; text-decoration: none; }
+
+a:hover, a:active, a:focus { color: #009cad; }
+
+.loginPage .el-card { width: 340px; display: flex; justify-content: center; }
+
+/*# sourceMappingURL=loginForm.css.map */

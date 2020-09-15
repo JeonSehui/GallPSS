@@ -1,0 +1,37 @@
+.loginPage {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    font-family: Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin: 0;
+    flex-direction: column;
+    min-height: 100vh;  
+    background: #102a43;
+}
+
+.login-button {
+    width: 100%;
+    height: 35px;
+    margin-top: 40px;
+    border-radius: 3px;
+    color: white;
+}
+.login-form {
+    width: 290px;
+    height: 500px;
+}
+.user-item {
+    padding-top: 50px;
+}
+.password-item {
+    padding-top: 15px;
+}
+.forgot-password {
+    margin-top: 10px;
+}

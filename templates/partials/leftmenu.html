@@ -1,0 +1,41 @@
+{% block content %}
+
+        <h1>HI</h1>
+
+{% endblock content %}
+
+
+{% block extra-script %}
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  axios.defaults.xsrfCookieName = "csrftoken";
+  axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+  var vm = new Vue({
+    el: "#app",
+    data: {
+    },
+    created: function () {
+      console.log("created()...");
+      this.fetch_all_menu();
+    },
+    methods: {
+      fetch_all_menu: function () {
+        console.log("fetch_all_menu()...");
+
+        var vm = this;
+        axios
+          .get("/boards/leftmenu")
+          .then(function (res) {
+            console.log("GET RES", res);
+          })
+          .catch(function (err) {
+            console.log("GET ERR", err);
+          });
+      },
+    },
+  });
+</script>
+{% endblock %}

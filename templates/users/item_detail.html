@@ -1,0 +1,28 @@
+{% extends '../index.html' %}
+{% block content %}
+<!Doctype html>
+<html lang=en>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    </head>
+    <body>
+        <div id=boardPad>
+            <div class="card">
+                <div class="card-header">
+                    업무공유 > 영업 > APIS
+                </div>
+                <div class="card-body" style="height: 370px; overflow-y:scroll;">
+                    <div>제목</div>
+                    <div>내용</div>
+
+                      <button id="updateButton" type="button" href="#" class="btn btn-info">수정</button>
+                      <button id="deleteButton" type="button" href="#" class="btn btn-danger">삭제</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+{% endblock %}

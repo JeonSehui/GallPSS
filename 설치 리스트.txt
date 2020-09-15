@@ -1,0 +1,3 @@
+pip install libsass django-compressor django-sass-processor
+
+pip install django-adminlte3

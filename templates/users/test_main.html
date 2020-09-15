@@ -1,0 +1,47 @@
+{% extends '../index.html' %}
+{% block content %}
+<!Doctype html>
+<html lang=en>
+    <head>
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    </head>
+    <body>
+        <div id=boardPad>
+            <div class="card">
+                <div class="card-header">
+                    게시판
+                </div>
+                <div class="card-body" style="height: 370px; overflow-y:scroll;">
+                    <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Title</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for item in boarditems %}
+                          <tr onclick="show_detail('{{item.assginboardid}}', '{{item.itemid}}')">
+                            <th scope="row">{{item.itemid}}</th>
+                            <td>{{item.itemtitle}}</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      <button id="writeButton" type="button" class="btn btn-info"
+                            href='#'>글쓰기</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+    function show_detail(boardid, itemid){
+        console.log('boardid : '+ boardid + 'itemid : ' + itemid)
+        location.href = '/boards/main?boardid='+boardid+'?itemid='+itemid
+    }
+</script>
+{% endblock %}

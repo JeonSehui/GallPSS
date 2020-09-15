@@ -1,0 +1,123 @@
+{% extends "base.html" %} {% block page_title %} Login {% endblock page_title %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>    
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'users/loginForm2.css' %}">
+    {% load sass_tags %}
+    <link href="{% sass_src 'users/loginForm.scss' %}" rel="stylesheet" type="text/css" />
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+  <body> 
+    <div id="app"> 
+      <!-- <div class="inputBox" id="form">
+        {% csrf_token %} 
+        <input class="name" type="text" placeholder="사번" v-model.trim="id"/>
+        <input class="item" type="text" placeholder="비밀번호" v-model.trim="password" v-on:keyup.enter="add_todo()"/>
+        <button v-on:click="login()" class="btn btn-primary btn-sm">Login</button>
+        
+      </div> -->
+      <div class="loginPage">
+        <el-card>
+          <h2>Login</h2>
+          <el-form
+              class="login-form"
+              :model="model"
+              :rules="rules"
+              ref="form"
+              @submit.native.prevent="login"
+            >
+              <el-form-item class="user-item" prop="id">
+                <el-input v-model.trim="model.id" placeholder="사번" prefix-icon="fa fa-user"></el-input>
+              </el-form-item>
+              <el-form-item class="password-item" prop="password">
+                <el-input
+                  v-model.trim="model.password"
+                  placeholder="비밀번호"
+                  type="password"
+                  prefix-icon="fa fa-lock"
+                ></el-input>
+              </el-form-item>
+              <el-form-item>
+                <el-button
+                  :loading="loading"
+                  class="login-button"
+                  type="primary"
+                  @click="login()"
+                  block
+                >Login</el-button>
+              </el-form-item>
+              <a class="forgot-password" href="https://oxfordinformatics.com/">Forgot password ?</a>
+          </el-form>
+        </el-card>
+      </div>
+      <br />
+    </div>    
+  </body>
+</html>
+{% endblock content %}
+
+{% block extra-script %}
+<script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  axios.defaults.xsrfCookieName = "csrftoken";
+  axios.defaults.xsrfHeaderName = "X-CSRFToken";
+
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      validCredentials: {
+        id: "lightscope",
+        password: "lightscope"
+      },
+      model: {
+        id: "",
+        password: ""
+      },
+      loading: false,
+      rules: {
+        id: [
+          {
+            required: true,
+            message: "Username is required",
+            trigger: "blur"
+          },
+        ],
+        password: [
+          { required: true, message: "Password is required", trigger: "blur" },
+        ]
+      }
+    },
+    methods: {
+      login: function () {
+        console.log("login...");
+
+        
+        var postData = {'id' : this.model.id, 'password': this.model.password};
+        console.log(postData);
+        
+        axios.post('users/login', postData)
+                    .then(function (res) {
+                        console.log("POST RES", res);
+                        console.log(res.data.login)
+                        if(res.status == 200 && res.data.login){
+                            location.href = 'http://127.0.0.1:8000/' + res.data.url
+                        }else{
+                            alert("로그인 실패")
+                        }
+                    })
+                    .catch(function (err) {
+                        console.log("POST ERR", err)
+                    })
+      },
+    },
+  });
+</script>
+{% endblock %}

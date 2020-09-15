@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+
+{% block page_title %}
+    Home
+{% endblock page_title %}
+
+{% block content %}
+
+    <h5>
+        {% include "partials/leftmenu.html" %}
+        
+        <li><a href="{% url "users:logout" %}">Log out</a></li>    
+
+        <a href="/main">test</a>
+    </h5>
+
+{% endblock content %}
