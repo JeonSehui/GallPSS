@@ -1,0 +1,29 @@
+{% extends 'adminlte/lib/_styles.html' %}
+{% block styles %}
+{{ block.super }}
+<style>
+.card-body {
+    position:relative;
+}
+#writeButton {
+    position: absolute;
+    bottom: 15px;
+    right: 18px;
+}
+#saveButton {
+    position: absolute;
+    bottom: 15px;
+    right: 18px;
+}
+#updateButton {
+    position: absolute;
+    bottom: 15px;
+    right: 85px;
+}
+#deleteButton {
+    position: absolute;
+    bottom: 15px;
+    right: 18px;
+}
+</style>
+{% endblock %}
