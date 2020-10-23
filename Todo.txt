@@ -1,0 +1,6 @@
+[front]
+
+[back]
+- 사이드바 클릭시 test_main.html로 호출
+- 아이템 클리시 item_detail.html로 호출
+- 글쓰기 클릭시 create_item.html로 호출

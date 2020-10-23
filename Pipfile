@@ -11,7 +11,7 @@ django = "==2.2.5"
 pillow = "*"
 
 [requires]
-python_version = "3.8.2"
+python_version = "3.7.5"
 
 [pipenv]
 allow_prereleases = true
