@@ -22,7 +22,7 @@ def loginProc(request):
             print("인증성공")
             login(request,user)
             print("로그인 성공")
-            data = {'url': 'main', 'login':True}
+            data = {'url': 'boards/main', 'login':True}
             return JsonResponse(data, status=200)
         else:
             print("인증실패")
