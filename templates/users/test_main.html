@@ -32,7 +32,7 @@
                         </tbody>
                       </table>
                       <button id="writeButton" type="button" class="btn btn-info"
-                            href='#'>글쓰기</button>
+                            href='/boards/create/{{item.assginboardid}}'> 글쓰기</button>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
 <script>
     function show_detail(boardid, itemid){
         console.log('boardid : '+ boardid + 'itemid : ' + itemid)
-        location.href = '/boards/main?boardid='+boardid+'?itemid='+itemid
+        location.href = '/boards/itemid/'+itemid
     }
 </script>
 {% endblock %}
