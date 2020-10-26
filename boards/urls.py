@@ -3,5 +3,7 @@ from boards import views as board_views
 
 app_name = "boards"
 
-urlpatterns = [path("leftmenu", board_views.LeftMenu.as_view(), name="leftmenu"),
-                path("main", board_views.Category.as_view(), name="category"), ]
+urlpatterns = [path("main", board_views.Category.as_view(), name="main"),
+                path("boardid/<int:id>", board_views.GetBoardItem.as_view(), name="getItemDetail"),
+                path("itemid/<int:id>", board_views.GetBoardItem.as_view(), name="getItemDetail"),
+                path("create/<int:id>", board_views.GetBoardItem.as_view(), name="getItemDetail")]
