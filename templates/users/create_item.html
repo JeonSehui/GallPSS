@@ -12,7 +12,36 @@
         <div id=boardPad>
             <div class="card">
                 <div class="card-header">
-                    업무공유 > 영업 > APIS
+                    <script>
+                        var categoryid, itemid, detailid;
+                        var categoryName, partName, boardName;
+                        var get_boardid = location.href.substr(location.href.search('create')+7,9)
+                        //현 게시판 소속 카테고리 정보 get
+                        document.write('{% for cate in categories %}')
+                        if('{{cate.boardid}}' == get_boardid){
+                          categoryid = '{{cate.categoryid}}'
+                          itemid = '{{cate.itemid}}'
+                          detailid = get_boardid
+                          boardName = '{{cate.boardname}}'
+                        }
+                        document.write('{% endfor %}')
+  
+                        //카테고리 이름 get
+                        document.write('{% for cate in categories %}')
+                        if('{{cate.categoryid}}' == categoryid && '{{cate.itemid}}' == 0 && '{{cate.detailid}}' == 0){
+                          categoryName = '{{cate.boardname}}'
+                        }
+                        else if('{{cate.categoryid}}' == categoryid && '{{cate.itemid}}' == itemid && '{{cate.detailid}}' == 0){
+                          partName = '{{cate.boardname}}'
+                        }
+                        document.write('{% endfor %}')
+                        
+                        //현 게시판 카테고리 출력
+                        if(partName == null)
+                          document.write(categoryName+" > "+boardName)
+                        else
+                          document.write(categoryName+" > "+partName+" > "+boardName)
+                      </script>
                 </div>
                 <div class="card-body" style="height: 370px; overflow-y:scroll;">
                     <form>

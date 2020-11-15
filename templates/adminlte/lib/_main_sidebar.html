@@ -1,5 +1,4 @@
 {% extends 'adminlte/lib/_main_sidebar.html' %}
- 
 {% block user_panel %}
 {% endblock %}
  
@@ -8,38 +7,34 @@
  
 {% block nav_links_ul %}
 <nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
     {% block nav_links_outer %}
-    {% for cate in categories %}
-        {% if cate.classification == "카테고리" %}
-            <li class="nav-header">{% block nav_heading %}{{cate.boardname}}{% endblock nav_heading%}</li>
-        {% endif %}
-        {% block nav_links %}
-            <li class="nav-item has-tree-view ">
+        {% for cate in categories %}
+            {% if cate.classification == "카테고리" %}
+                <li class="nav-header">{% block nav_heading %}{{cate.boardname}}{% endblock nav_heading%}</li>
+            {% endif %}
+
+            {% block nav_links %}
                 {% if cate.classification == "중분류" %}
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-circle text-warning"></i> <p>{{cate.boardname}}</p>
-                    <p><i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
+                    <li class="nav-item has-treeview ">
+                        <a href="#" class="nav-link"><i class="nav-icon fas fa-circle text-warning"></i><p>{{cate.boardname}}</p><p><i class="right fas fa-angle-left"></i></p></a>
                 {% elif cate.classification == "소분류" %}                
                     {% if cate.itemid == "0" %}
                         <li class="nav-item">
                             <a href="/boards/boardid/{{cate.boardid}}" class="nav-link"><i class="nav-icon nav-icon far fa-circle text-info"></i>{{cate.boardname}}</a>
                         </li>
                     {% elif cate.itemid != "0" %}
-                        <ul class="nav nav-treeview menu-open">
-                            <li class="nav-item">
-                                <a href="/boards/boardid/{{cate.boardid}}" class="nav-link">
-                                    <i class="nav-icon fas fa-circle text-info"></i> {{cate.boardname}}
-                                </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item has-treeview">
+                                <a href="/boards/boardid/{{cate.boardid}}" class="nav-link"><i class="nav-icon nav-icon far fa-circle text-info"></i>{{cate.boardname}}</a>
                             </li>
                         </ul>
                     {% endif %}
                 {% endif %}
-            </li>
-        {% endblock nav_links %}
-    {% endfor %}
+            {% endblock nav_links %}
+        {% endfor %}
+                    </li> 
     {% endblock nav_links_outer %}
     </ul>
 </nav>
