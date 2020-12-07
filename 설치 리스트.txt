@@ -1,3 +1,9 @@
+pip install Pillow
+
+pip install django==2.2.5
+
 pip install libsass django-compressor django-sass-processor
 
 pip install django-adminlte3
+
+pip install django-summernote

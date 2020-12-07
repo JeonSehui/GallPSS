@@ -7,4 +7,5 @@ urlpatterns = [
     path("users/", include("users.urls", namespace="users")),
     path("boards/", include("boards.urls", namespace="boards")),
     path("admin/", admin.site.urls),
+    path('summernote/', include('django_summernote.urls')),
 ]

@@ -1,4 +1,44 @@
 {% extends '../index.html' %}
+{% block content_header %}
+    <section class="content-header">
+      <div class="container-fluid">
+        <script>
+          var categoryid, itemid, detailid;
+          var categoryName, partName, boardName;
+          var start_id = location.href.search('boardid')+8
+          var end_id = location.href.search('page')
+          var get_boardid = location.href.substr(start_id,end_id-start_id-1)
+          //현 게시판 소속 카테고리 정보
+          document.write('{% for cate in categories %}')
+          if('{{cate.boardid}}' == get_boardid){
+            categoryid = '{{cate.categoryid}}'
+            itemid = '{{cate.itemid}}'
+            detailid = get_boardid
+            boardName = '{{cate.boardname}}'
+          }
+          document.write('{% endfor %}')
+
+          //카테고리 이름 get
+          document.write('{% for cate in categories %}')
+          if('{{cate.categoryid}}' == categoryid && '{{cate.itemid}}' == 0 && '{{cate.detailid}}' == 0){
+            categoryName = '{{cate.boardname}}'
+          }
+          else if('{{cate.categoryid}}' == categoryid && '{{cate.itemid}}' == itemid && '{{cate.detailid}}' == 0){
+            partName = '{{cate.boardname}}'
+          }
+          document.write('{% endfor %}')
+          
+          //현 게시판 카테고리 출력
+          if(partName == null)
+            document.write(categoryName+" > "+boardName)
+          else
+            document.write(categoryName+" > "+partName+" > "+boardName)
+        </script>
+
+      </div>
+    </section>
+{% endblock %}
+
 {% block content %}
 <!Doctype html>
 <html lang=en>
@@ -9,13 +49,15 @@
         <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     </head>
     <body>
-        <div id=boardPad>
+        <div id=boardPad class="content">
             <div class="card">
                 <div class="card-header">
                     <script>
                       var categoryid, itemid, detailid;
                       var categoryName, partName, boardName;
-                      var get_boardid = location.href.substr(location.href.search('boardid')+8,10)
+                      var start_id = location.href.search('boardid')+8
+                      var end_id = location.href.search('page')
+                      var get_boardid = location.href.substr(start_id,end_id-start_id-1)
                       //현 게시판 소속 카테고리 정보
                       document.write('{% for cate in categories %}')
                       if('{{cate.boardid}}' == get_boardid){
@@ -48,24 +90,49 @@
                         <thead>
                           <tr>
                             <th scope="col">No.</th>
-                            <th scope="col">Title</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">작성일</th>
                           </tr>
                         </thead>
                         <tbody>
                           <script>
-                            var index = 0;
+                            var pageN = location.href.substr(location.href.search('page')+5,10)
+                            var index = 5*(pageN-1);
                             document.write('{% for item in boarditems %}')
                             index = index + 1
                             document.write('<tr onclick="show_detail(\'{{item.assginboardid}}\', \'{{item.itemid}}\')">')
                               document.write('<th scope="row">'+index+'</th>')
                               document.write('<td>{{item.itemtitle}}</td>')
+                              document.write('<td></td>')
+                              document.write('<td></td>')
                             document.write('</tr>')
                             document.write('{% endfor %}')
                           </script>
                         </tbody>
                       </table>
                       <button id="writeButton" type="button" class="btn btn-info"
-                            onclick="create()"> 글쓰기</button>
+                          style="float: right;" onclick="create()"> 글쓰기</button>
+
+                      <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                          {% if boarditems.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                            <li class="page-item"><a class="page-link" href="?page={{ boarditems.previous_page_number }}"><</a></li>
+                          {% endif %}
+                  
+                          {% for i in p_range %}                          
+                            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                            <!-- <li class="page-item"><a {% if boarditems.number == i %}class="active" {% endif %} href="?page={{i}}">{{i}}</a></li> -->
+                          {% endfor %}
+                  
+                          {% if boarditems.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ boarditems.next_page_number }}">></a></li>
+                            <li class="page-item"><a class="page-link" href="?page={{ boarditems.paginator.num_pages }}">last &raquo;</a></li>
+                          {% endif %}
+              
+                        </ul>
+                      </nav>
                 </div>
             </div>
         </div>
@@ -77,7 +144,9 @@
         location.href = '/boards/itemid/'+itemid
     }
     function create(){
-      boardid = location.href.substr(location.href.search('boardid')+8,10)
+      startid = location.href.search('boardid')+8
+      endid = location.href.search('page')
+      boardid = location.href.substr(startid, endid-startid-1)
       location.href = '/boards/create/'+boardid
     }
 </script>

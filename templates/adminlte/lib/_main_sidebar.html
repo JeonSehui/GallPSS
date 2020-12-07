@@ -22,12 +22,12 @@
                 {% elif cate.classification == "소분류" %}                
                     {% if cate.itemid == "0" %}
                         <li class="nav-item">
-                            <a href="/boards/boardid/{{cate.boardid}}" class="nav-link"><i class="nav-icon nav-icon far fa-circle text-info"></i>{{cate.boardname}}</a>
+                            <a href="/boards/boardid/{{cate.boardid}}?page=1" class="nav-link"><i class="nav-icon nav-icon far fa-circle text-info"></i>{{cate.boardname}}</a>
                         </li>
                     {% elif cate.itemid != "0" %}
                         <ul class="nav nav-treeview">
                             <li class="nav-item has-treeview">
-                                <a href="/boards/boardid/{{cate.boardid}}" class="nav-link"><i class="nav-icon nav-icon far fa-circle text-info"></i>{{cate.boardname}}</a>
+                                <a href="/boards/boardid/{{cate.boardid}}?page=1" class="nav-link"><i class="nav-icon nav-icon far fa-circle text-info"></i>{{cate.boardname}}</a>
                             </li>
                         </ul>
                     {% endif %}

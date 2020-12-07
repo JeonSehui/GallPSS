@@ -1,4 +1,44 @@
 {% extends '../index.html' %}
+{% block content_header %}
+    <section class="content-header">
+      <div class="container-fluid">
+        <script>
+          var assignboardid, categoryid, itemid, detailid;
+          var categoryName, partName, boardName;
+          var get_itemid = location.href.substr(location.href.search('itemid')+7,9)
+          //boardid get
+          assignboardid = '{{itemdetails.assginboardid}}'
+
+          //현 게시판 소속 카테고리 정보 get
+          document.write('{% for cate in categories %}')
+          if('{{cate.boardname}}' == assignboardid){
+            categoryid = '{{cate.categoryid}}'
+            itemid = '{{cate.itemid}}'
+            detailid = assignboardid
+            boardName = '{{cate.boardname}}'
+          }
+          document.write('{% endfor %}')
+
+          //카테고리 이름 get
+          document.write('{% for cate in categories %}')
+          if('{{cate.categoryid}}' == categoryid && '{{cate.itemid}}' == 0 && '{{cate.detailid}}' == 0){
+            categoryName = '{{cate.boardname}}'
+          }
+          else if('{{cate.categoryid}}' == categoryid && '{{cate.itemid}}' == itemid && '{{cate.detailid}}' == 0){
+            partName = '{{cate.boardname}}'
+          }
+          document.write('{% endfor %}')
+          
+          //현 게시판 카테고리 출력
+          if(partName == null)
+            document.write(categoryName+" > "+boardName)
+          else
+            document.write(categoryName+" > "+partName+" > "+boardName)
+        </script>
+      </div>
+    </section>
+{% endblock %}
+
 {% block content %}
 <!Doctype html>
 <html lang=en>
@@ -12,49 +52,23 @@
         <div id=boardPad>
             <div class="card">
                 <div class="card-header">
-                    <script>
-                        var assignboardid, categoryid, itemid, detailid;
-                        var categoryName, partName, boardName;
-                        var get_itemid = location.href.substr(location.href.search('itemid')+7,9)
-                        //boardid get
-                        assignboardid = '{{itemdetails.assginboardid}}'
-
-                        //현 게시판 소속 카테고리 정보 get
-                        document.write('{% for cate in categories %}')
-                        if('{{cate.boardname}}' == assignboardid){
-                          categoryid = '{{cate.categoryid}}'
-                          itemid = '{{cate.itemid}}'
-                          detailid = assignboardid
-                          boardName = '{{cate.boardname}}'
-                        }
-                        document.write('{% endfor %}')
-  
-                        //카테고리 이름 get
-                        document.write('{% for cate in categories %}')
-                        if('{{cate.categoryid}}' == categoryid && '{{cate.itemid}}' == 0 && '{{cate.detailid}}' == 0){
-                          categoryName = '{{cate.boardname}}'
-                        }
-                        else if('{{cate.categoryid}}' == categoryid && '{{cate.itemid}}' == itemid && '{{cate.detailid}}' == 0){
-                          partName = '{{cate.boardname}}'
-                        }
-                        document.write('{% endfor %}')
-                        
-                        //현 게시판 카테고리 출력
-                        if(partName == null)
-                          document.write(categoryName+" > "+boardName)
-                        else
-                          document.write(categoryName+" > "+partName+" > "+boardName)
-                      </script>
+                  {{itemdetails.itemtitle}}
                 </div>
                 <div class="card-body" style="height: 370px; overflow-y:scroll;">
-                    <div>{{itemdetails.itemtitle}}</div>
                     <div>{{itemdetails.itemcontent}}</div>
 
-                      <button id="updateButton" type="button" href="#" class="btn btn-info">수정</button>
+                      <button id="updateButton" type="button" class="btn btn-info" onclick="edit()">수정</button>
                       <button id="deleteButton" type="button" href="#" class="btn btn-danger">삭제</button>
                 </div>
             </div>
         </div>
     </body>
 </html>
+<script>  
+  function edit(){
+      startid = location.href.search('itemid')+7
+      itemid = location.href.substr(startid, 10)
+      location.href = '/boards/edit/'+itemid
+    }
+</script>
 {% endblock %}

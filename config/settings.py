@@ -32,6 +32,7 @@ THIRD_PARTY_APPS = [
     'adminlte3',#djangl.contrib.admin전에 와야함.
     'adminlte3_theme',
     "sass_processor",
+    'django_summernote',
 ]
 
 DJANGO_APPS = [
@@ -142,3 +143,6 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     # 'sass-processor.finders.CssFinder',
 )
+
+MEDIA_URL='/media/'
+SUMMERNOTE_CONFIG = {}
